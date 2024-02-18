@@ -1,0 +1,108 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+<br>
+
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<h5> Client: {{client.nom}}</h5>
+			<hr>
+			<a class="btn btn-outline-info  btn-sm btn-block" href="{% url "modifier_client" client.id %}">Modifier le Client</a>
+			<a class="btn btn-outline-danger  btn-sm btn-block" href="{% url "supprimer_client" client.id %}"> <i class="bi bi-trash"></i> Supprimer le Client</a>
+			
+
+		</div>
+	</div>
+
+	<div class="col-md">
+		<div class="card card-body">
+			<h5>Informations</h5>
+			<hr>
+			<p>Nom: {{client.nom}} </p>
+			<p> <i class="bi bi-telephone-fill"></i> Telephone: {{client.telephone}} </p>
+            <p>adresse: {{client.adresse}} </p>
+			
+            <h3 id="total">Total: $</h3>
+		</div>
+	</div>
+
+	<div class="col-md">
+		<div class="card card-body">
+			<h5>Total Dépôt(s)</h5>
+			<hr>
+			<h1 style="text-align: center;padding: 4px">{{commande_total}}</h1>
+		</div>
+        <div class="card card-body">
+          <a  class="btn btn-sm btn-success" href="{% url "voirRecu" client.id %}">Voir recu</a>
+        </div>
+	</div>
+</div>
+
+
+<br>
+<div class="row">
+	<div class="col">
+		<div class="card card-body">
+			<form method="get">
+
+		    <button class="btn btn-primary" type="submit">Search</button>
+           
+			
+		  </form>
+		</div>
+	</div>
+
+</div>
+<br>
+
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					
+					<th>Client</th>
+					<th>Date du Depot </th>
+					<th>Payer($)</th>
+					<th>Mise à Jour</th>
+					<th>Supprimer</th>
+                   
+				</tr>
+				{% for commande in commande %}
+				<tr>
+					
+					<th>{{commande.client}}</th>
+					<th>{{commande.date_time}}</th>
+					<th class="prix">{{commande.payer}}</th>
+					<th><a  class="btn btn-sm btn-warning" href="{% url "modifier_commande" commande.id %}">Modifier</a></th>
+					<th><a  class="btn btn-sm btn-danger" href="{% url "supprimer_commande" commande.id %}"><i class="bi bi-trash"></i> Supprimer</a></th>
+                   
+				</tr>
+				{% endfor %}
+
+			</table>
+		</div>
+	</div>
+</div>
+
+<script Type=" text/javascript">
+
+    document.addEventListener("DOMContentLoaded",function(){
+        var prixCells = document.querySelectorAll(".prix");
+
+        var total = 0;
+
+        prixCells.forEach(function(cell){
+            total += parseFloat(cell.textContent);
+        });
+
+        document.getElementById("total").textContent += total
+
+     });
+
+
+
+</script>
+{% endblock  %}

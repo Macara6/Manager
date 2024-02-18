@@ -1,0 +1,41 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+<br>
+<div class="row">
+
+	<div class="col-md-12 text-center">
+		<h5> <i class="bi bi-basket3-fill"></i> Tout les Dépôts:{{commande_total}} </h5>
+		<hr>
+		<div class="card card-body">
+			<a class="btn btn-primary  btn-sm btn-block" href="{% url "ajouter_commande" %}">Ajouter un Dépôts</a>
+			<table class="table table-sm">
+				<tr>
+				
+					<th>Client</th>
+					<th>Date</th>
+					<th>Payer($)</th>
+					<th>Mise à Jour</th>
+					<th>Supprimer</th>
+				</tr>
+				{% for commande in commandes %}
+				<tr>
+				
+				 <th>{{commande.client}}</th>
+				 <th>{{commande.date_time}}</th>
+				 <th>{{commande.payer}}</th>
+				 <th> <a class='btn btn-sm btn-warning' href="{% url "modifier_commande" commande.id %}">Modifier</a></th>
+				 <th> <a class='btn btn-sm btn-danger'  href="{% url "supprimer_commande" commande.id %}"> <i class="bi bi-trash"></i> Supprimer </a></th>
+				</tr> 
+				
+				{% endfor %}
+
+			</table>
+		</div>
+	</div>
+
+</div>
+
+
+{% endblock  %}

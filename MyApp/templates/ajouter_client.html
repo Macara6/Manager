@@ -1,0 +1,23 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+<h1 class="text-capitalize text-center mx-5 bg-success text-white"> Ajouter un client</h1>
+<div class="row">
+
+    <div class="col-md-9 text-center ">
+        <div class="card card-boby">
+            <form action="" method="POST">
+                 {% csrf_token %}
+                   {{form}}
+                <input type="submit" name="envoyer">
+            </form>
+        </div>   
+    </div>
+
+    </div>
+
+{% endblock  %}
+
+
+

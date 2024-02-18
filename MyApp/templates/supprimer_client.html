@@ -1,0 +1,16 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+
+<p1> Voulez-vous supprimer: {{client.nom}}</p>
+<form action="{% url "supprimer_client" client.id %}"  method="post">
+
+    {% csrf_token %}
+    <a class="btn btn-warning" href="{% url "acceuil" %}">NON</a>
+    <input type="submit" class="btn btn-danger" name="Confirmer"> 
+</form>
+
+
+
+{% endblock  %}
